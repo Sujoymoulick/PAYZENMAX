@@ -159,7 +159,7 @@ gstbillings/
 
 ## 🚀 Getting started
 
-**Requirements:** Node.js 20+ (developed on 26.7.0) and npm.
+**Requirements:** Node.js ≥ 22.23.4 (Cloudflare builds use 24, see `.nvmrc`) and npm 10+.
 
 ```bash
 git clone https://github.com/Sujoymoulick/PAYZENMAX.git
@@ -178,8 +178,8 @@ npm run dev
 | `npm run dev` | Astro dev server with HMR on port 5173 |
 | `npm run build` | Type-check (`tsc --noEmit`) and build static site into `dist/` |
 | `npm run preview` | Serve the production build on port 4173 |
-| `npm run cf:dev` | Build, then run it on the local Cloudflare Workers runtime (port 8787) |
-| `npm run deploy` | Build, then `wrangler deploy` to Cloudflare |
+| `npm run cf:dev` | `wrangler dev` — builds, then serves on the local Cloudflare Workers runtime (port 8787) |
+| `npm run deploy` | `wrangler deploy` — runs `npm run build` (via `build.command` in `wrangler.jsonc`), then deploys |
 
 ---
 
@@ -191,6 +191,8 @@ The site is served by **Cloudflare Workers Static Assets** (`wrangler.jsonc` →
 npx wrangler login     # once, opens the browser
 npm run deploy         # astro build + wrangler deploy
 ```
+
+**Git-connected Workers Builds:** push to `main` and Cloudflare runs `npm ci` then `npx wrangler deploy`, which builds the site itself through `build.command` — no extra build command needed in the dashboard.
 
 It goes live at `payzenmax.<your-subdomain>.workers.dev`. Add a custom domain under the Worker's **Domains & Routes** in the Cloudflare dashboard.
 

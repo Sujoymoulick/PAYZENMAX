@@ -170,53 +170,6 @@ body.lp {
 .note.is-drawn .note__head { animation-delay: 2.25s; animation-duration: .35s; }
 @keyframes draw { to { stroke-dashoffset: 0; } }
 
-/* Interactive GST quick-check */
-.calc {
-  position: absolute; left: max(24px, 3.4vw); top: 300px; z-index: 4;
-  width: 264px; padding: 16px; text-align: left;
-  border-radius: 20px; background: rgba(255,255,255,.88);
-  border: 1px solid var(--line);
-  box-shadow: 0 24px 50px -30px rgba(23,24,26,.45);
-  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-  display: grid; gap: 10px;
-  transform: rotate(-2deg);
-  transition: transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s;
-}
-.calc:hover, .calc:focus-within { transform: rotate(0) translateY(-4px); box-shadow: 0 30px 60px -30px rgba(27,94,59,.5); }
-.calc__head { display: grid; gap: 4px; }
-.calc__kicker { display: inline-flex; align-items: center; gap: 8px; font: 600 12px/1 var(--sans); color: var(--ink); }
-.calc__kicker .eyebrow__dot { width: 7px; height: 7px; box-shadow: 0 0 0 3px var(--mint); }
-.calc__hint { font: 500 10.5px/1.2 var(--mono); color: var(--muted); padding-left: 15px; }
-.calc__amount { display: grid; gap: 5px; }
-.calc__label { font: 600 10px/1 var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
-.calc__field {
-  display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px;
-  border-radius: 12px; border: 1px solid var(--line-strong); background: #fff;
-  font: 600 16px/1 var(--mono); color: var(--ink);
-  transition: border-color .2s, box-shadow .2s;
-}
-.calc__field:focus-within { border-color: var(--green); box-shadow: 0 0 0 3px var(--mint); }
-.calc__field input { flex: 1; min-width: 0; border: 0; outline: 0; background: none; font: inherit; color: inherit; }
-.calc__group { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; padding: 3px; border-radius: 12px; background: #EEEEEA; }
-.calc__group--2 { grid-template-columns: 1fr 1fr; }
-.calc__group button {
-  height: 30px; border: 0; border-radius: 9px; background: transparent; cursor: pointer;
-  font: 600 12px/1 var(--sans); color: var(--ink-2);
-  transition: background-color .2s, color .2s, box-shadow .2s;
-}
-.calc__group button:hover { color: var(--ink); }
-.calc__group button.is-on { background: #fff; color: var(--green); box-shadow: 0 1px 3px rgba(23,24,26,.12); }
-.calc__group button:focus-visible { outline: 2px solid var(--green); outline-offset: 1px; }
-.calc__out { margin: 0; display: grid; gap: 6px; padding-top: 10px; border-top: 1px dashed var(--line-strong); }
-.calc__out > div { display: flex; justify-content: space-between; align-items: baseline; }
-.calc__out > div[hidden] { display: none; }
-.calc__out dt { font-size: 12.5px; color: var(--ink-2); }
-.calc__out dt i { font-style: normal; font: 500 10.5px/1 var(--mono); color: var(--muted); margin-left: 3px; }
-.calc__out dd { margin: 0; font: 500 12.5px/1 var(--mono); color: var(--ink); }
-.calc__total { margin-top: 2px; padding-top: 8px; border-top: 1px solid var(--line); }
-.calc__total dt { font-weight: 600; color: var(--ink) !important; }
-.calc__total dd { font: 700 16px/1 var(--mono) !important; color: var(--green) !important; }
-@media (max-width: 1279px) { .calc { display: none; } }
 
 .stage {
   position: sticky; top: 0; z-index: 1;
@@ -675,7 +628,6 @@ body.lp {
 @media (max-width: 1023px), (prefers-reduced-motion: reduce) {
   .hero { position: relative; padding-top: 112px; }
   .note { display: none; }
-  .calc { display: grid !important; position: relative; left: auto; top: auto; margin-top: 28px; width: min(100%, 340px); transform: none; }
   .stage { position: relative; height: auto; overflow: visible; overflow-x: clip; padding: 28px 0 8px; }
   .scene { position: relative; height: calc(625px * var(--fit) + 90px * var(--fit) + 30px); }
   .laptop { top: 0; margin-top: 0; transform-origin: 50% 0; transform: scale(var(--fit)) rotateX(-8deg); }

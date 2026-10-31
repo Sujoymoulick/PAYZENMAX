@@ -2,9 +2,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
-import { calculateLineItem } from '../core/gstEngine';
-import { formatCurrency } from '../core/formatters';
-import type { GSTSupplyType } from '../types';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -208,7 +205,7 @@ const laptop = $('[data-laptop]');
 const lid = $('[data-lid]');
 
 /* ------------------------------------------------------------------
-   Hero: description reveal, handwritten note, GST quick-check
+   Hero: description reveal, handwritten note
    ------------------------------------------------------------------ */
 const heroSub = $('[data-hero-sub]');
 const note = $('[data-note]');
@@ -231,77 +228,8 @@ if (reduceMotion) {
   window.setTimeout(() => note.classList.add('is-drawn'), 900);
 }
 
-const calc = $('[data-calc]');
-const amountInput = $<HTMLInputElement>('[data-calc-amount]', calc);
-const calcState = { rate: 18, supply: 'INTRA_STATE' as GSTSupplyType };
-const shown = { total: 11800 };
-
-function parseAmount(v: string) {
-  const n = Number(v.replace(/[^\d.]/g, ''));
-  return Number.isFinite(n) ? Math.min(n, 99_99_99_999) : 0;
-}
-
-function renderCalc(animate = true) {
-  const r = calculateLineItem({
-    quantity: 1,
-    unitPrice: parseAmount(amountInput.value),
-    discountPercent: 0,
-    taxMode: 'EXCLUSIVE',
-    gstRate: calcState.rate,
-    supplyType: calcState.supply
-  });
-  const intra = calcState.supply === 'INTRA_STATE';
-  $('[data-row="cgst"]', calc).hidden = !intra;
-  $('[data-row="sgst"]', calc).hidden = !intra;
-  $('[data-row="igst"]', calc).hidden = intra;
-  $('[data-cgst-rate]', calc).textContent = `${r.cgstRate}%`;
-  $('[data-sgst-rate]', calc).textContent = `${r.sgstRate}%`;
-  $('[data-igst-rate]', calc).textContent = `${calcState.rate}%`;
-  $('[data-out="cgst"]', calc).textContent = formatCurrency(r.cgstAmount);
-  $('[data-out="sgst"]', calc).textContent = formatCurrency(r.sgstAmount);
-  $('[data-out="igst"]', calc).textContent = formatCurrency(r.igstAmount);
-
-  // Count the total up/down to the new value
-  const totalEl = $('[data-out="total"]', calc);
-  gsap.to(shown, {
-    total: r.total,
-    duration: animate && !reduceMotion ? 0.6 : 0,
-    ease: 'power2.out',
-    overwrite: true,
-    onUpdate: () => (totalEl.textContent = formatCurrency(Math.round(shown.total * 100) / 100))
-  });
-}
-
-function pick(attr: 'rate' | 'supply', btn: HTMLButtonElement) {
-  $$<HTMLButtonElement>(`[data-${attr}]`, calc).forEach((b) => {
-    const on = b === btn;
-    b.classList.toggle('is-on', on);
-    b.setAttribute('aria-checked', String(on));
-  });
-}
-
-calc.addEventListener('click', (e) => {
-  const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('button');
-  if (!btn) return;
-  if (btn.dataset.rate) {
-    calcState.rate = Number(btn.dataset.rate);
-    pick('rate', btn);
-  } else if (btn.dataset.supply) {
-    calcState.supply = btn.dataset.supply as GSTSupplyType;
-    pick('supply', btn);
-  }
-  renderCalc();
-});
-amountInput.addEventListener('input', () => renderCalc());
-amountInput.addEventListener('blur', () => {
-  const n = parseAmount(amountInput.value);
-  amountInput.value = n.toLocaleString('en-IN', { maximumFractionDigits: 2 });
-});
-renderCalc(false);
-
 if (!reduceMotion) {
   gsap.from('.reveal-hero', { y: 28, autoAlpha: 0, duration: 1, ease: 'power3.out', stagger: 0.09, delay: 0.1 });
-  gsap.from(calc, { x: -40, autoAlpha: 0, duration: 1, ease: 'power3.out', delay: 0.9 });
   gsap.fromTo(lid, { rotationX: -88 }, { rotationX: 6, duration: 2, ease: 'power3.inOut', delay: 0.35 });
   gsap.from(nav, { y: -30, autoAlpha: 0, duration: 0.9, ease: 'power3.out' });
 } else {

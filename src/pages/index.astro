@@ -196,35 +196,6 @@ const testimonials = [
               </svg>
             </div>
           </div>
-
-          <form class="calc" data-calc aria-label="Quick GST check" onsubmit="return false">
-            <div class="calc__head">
-              <p class="calc__kicker"><span class="eyebrow__dot"></span> Try the GST engine</p>
-              <p class="calc__hint">Same paise-exact engine as the app</p>
-            </div>
-            <label class="calc__amount">
-              <span class="calc__label">Taxable amount</span>
-              <span class="calc__field">
-                <span aria-hidden="true">₹</span>
-                <input type="text" inputmode="decimal" value="10,000" data-calc-amount aria-label="Taxable amount in rupees" />
-              </span>
-            </label>
-            <div class="calc__group" role="radiogroup" aria-label="GST rate">
-              {[5, 12, 18, 28].map((r) => (
-                <button type="button" role="radio" aria-checked={r === 18 ? 'true' : 'false'} class={r === 18 ? 'is-on' : undefined} data-rate={r}>{r}%</button>
-              ))}
-            </div>
-            <div class="calc__group calc__group--2" role="radiogroup" aria-label="Supply type">
-              <button type="button" role="radio" aria-checked="true" class="is-on" data-supply="INTRA_STATE">Intra-state</button>
-              <button type="button" role="radio" aria-checked="false" data-supply="INTER_STATE">Inter-state</button>
-            </div>
-            <dl class="calc__out" aria-live="polite">
-              <div data-row="cgst"><dt>CGST <i data-cgst-rate>9%</i></dt><dd data-out="cgst">₹ 900.00</dd></div>
-              <div data-row="sgst"><dt>SGST <i data-sgst-rate>9%</i></dt><dd data-out="sgst">₹ 900.00</dd></div>
-              <div data-row="igst" hidden><dt>IGST <i data-igst-rate>18%</i></dt><dd data-out="igst">₹ 0.00</dd></div>
-              <div class="calc__total"><dt>Invoice total</dt><dd data-out="total">₹ 11,800.00</dd></div>
-            </dl>
-          </form>
         </section>
 
         <div class="stage" data-stage aria-label="Interactive product preview">

@@ -3,6 +3,10 @@
   // Static Astro build (landing at "/", billing app at "/app/") served by Workers Static Assets.
   "name": "payzenmax",
   "compatibility_date": "2026-10-30",
+  // Runs before every `wrangler deploy` / `wrangler dev`, so ./dist always exists (incl. Workers Builds CI).
+  "build": {
+    "command": "npm run build"
+  },
   "assets": {
     "directory": "./dist",
     "html_handling": "auto-trailing-slash",
