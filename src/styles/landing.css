@@ -144,7 +144,7 @@ body.lp {
 }
 .scene {
   position: absolute; inset: 0;
-  perspective: 2600px; perspective-origin: 50% 38%;
+  perspective: 3800px; perspective-origin: 50% 40%;
   transform-style: preserve-3d;
 }
 
@@ -248,49 +248,50 @@ body.lp {
 }
 
 .laptop__base, .laptop__shadow {
-  position: absolute; top: 100%; left: -3%; width: 106%; height: 560px;
+  /* real-world proportions: base as wide as the lid, ~0.68× its height deep */
+  position: absolute; top: 100%; left: 0; width: 100%; height: 425px;
   transform-origin: 50% 0;
   transform-style: preserve-3d;
 }
 .laptop__base { transform: rotateX(90deg); }
 .base__deck {
   position: absolute; inset: 0;
-  border-radius: 8px 8px 28px 28px;
+  border-radius: 6px 6px 22px 22px;
   background: linear-gradient(180deg, #dcddd8 0%, #e8e9e5 40%, #e1e2dd 100%);
   box-shadow: inset 0 0 0 1px rgba(0,0,0,.06), inset 0 1px 0 rgba(255,255,255,.7);
 }
 /* hinge */
 .base__deck::before {
-  content: ''; position: absolute; left: 26%; right: 26%; top: 0; height: 10px;
+  content: ''; position: absolute; left: 30%; right: 30%; top: 0; height: 7px;
   border-radius: 0 0 8px 8px;
   background: linear-gradient(180deg, #a9aaa5, #c9cac5);
 }
 .base__keys {
-  position: absolute; left: 12%; right: 12%; top: 9%; height: 40%;
-  border-radius: 8px;
+  position: absolute; left: 11%; right: 11%; top: 8%; height: 42%;
+  border-radius: 6px;
   /* deck-coloured gaps draw individual keycaps */
   background:
-    repeating-linear-gradient(90deg, transparent 0 48px, #dfe0db 48px 53px),
-    repeating-linear-gradient(0deg, transparent 0 34px, #dfe0db 34px 39px),
-    #2c2d30;
-  box-shadow: 0 0 0 4px #dfe0db, 0 0 0 5px rgba(0,0,0,.06);
+    repeating-linear-gradient(90deg, transparent 0 43px, #e2e3de 43px 46px),
+    repeating-linear-gradient(0deg, transparent 0 26px, #e2e3de 26px 29.8px),
+    linear-gradient(180deg, #34353a, #2a2b2f);
+  box-shadow: 0 0 0 3px #e2e3de, 0 0 0 4px rgba(0,0,0,.05);
 }
 .base__pad {
-  position: absolute; left: 34%; width: 32%; bottom: 7%; height: 32%;
-  border-radius: 12px;
+  position: absolute; left: 35%; width: 30%; bottom: 7%; height: 34%;
+  border-radius: 10px;
   background: linear-gradient(180deg, #e3e4e0, #dadbd6);
   box-shadow: inset 0 0 0 1px rgba(0,0,0,.08), inset 0 1px 2px rgba(0,0,0,.05);
 }
 .base__front {
-  position: absolute; left: 1.5%; right: 1.5%; top: 100%; height: 12px;
+  position: absolute; left: 1.2%; right: 1.2%; top: 100%; height: 9px;
   transform-origin: 50% 0; transform: rotateX(-90deg);
   background: linear-gradient(180deg, #c4c5c0, #9d9e99);
-  border-radius: 0 0 12px 12px;
+  border-radius: 0 0 10px 10px;
 }
 .base__front span { position: absolute; left: 42%; right: 42%; top: 0; height: 5px; border-radius: 0 0 6px 6px; background: #a7a8a3; }
 .laptop__shadow {
-  left: -14%; width: 128%;
-  transform: rotateX(90deg) translateZ(-20px);
+  left: -8%; width: 116%;
+  transform: rotateX(90deg) translateZ(-14px);
   background: radial-gradient(50% 50% at 50% 50%, rgba(23,24,26,.32), rgba(23,24,26,0) 70%);
   filter: blur(18px);
   pointer-events: none;
@@ -585,7 +586,7 @@ body.lp {
 @media (max-width: 1023px), (prefers-reduced-motion: reduce) {
   .hero { position: relative; padding-top: 112px; }
   .stage { position: relative; height: auto; overflow: visible; overflow-x: clip; padding: 28px 0 8px; }
-  .scene { position: relative; height: calc(625px * var(--fit) + 110px * var(--fit) + 30px); }
+  .scene { position: relative; height: calc(625px * var(--fit) + 90px * var(--fit) + 30px); }
   .laptop { top: 0; margin-top: 0; transform-origin: 50% 0; transform: scale(var(--fit)) rotateX(-8deg); }
   .laptop__lid { transform: rotateX(6deg); }
   .scene > .phone { display: none; }

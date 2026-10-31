@@ -235,7 +235,7 @@ const cue = $('[data-cue]');
 const vw = () => window.innerWidth;
 const vh = () => window.innerHeight;
 // Laptop is designed at 1000×625 (+ base); fit it to the viewport.
-const heroFit = () => Math.min(0.86, (vw() * 0.62) / 1000, (vh() * 0.95) / 760);
+const heroFit = () => Math.min(0.8, (vw() * 0.58) / 1000, (vh() * 0.9) / 760);
 const phoneFit = () => Math.min(1, (vh() * 0.72) / 618);
 
 function setStaticFit() {
@@ -273,7 +273,7 @@ mm.add(
       x: 0,
       y: () => Math.max(vh() * 0.4, 560 - vh() * 0.5 + 312 * heroFit()),
       scale: () => heroFit(),
-      rotationX: -14,
+      rotationX: -9,
       rotationY: 0,
       rotationZ: 0
     };
