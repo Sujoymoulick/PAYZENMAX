@@ -113,6 +113,17 @@ const stats = [
   { v: '24', s: '×7', l: 'works offline, at the counter' }
 ];
 
+// Hero description, split into words for the reveal; `hl` phrases get a drawn underline.
+const heroSub: { t: string; hl?: boolean }[] = [
+  { t: 'PayzenMax turns every counter sale into a' },
+  { t: 'Rule 46 tax invoice', hl: true },
+  { t: '— CGST, SGST or IGST worked out' },
+  { t: 'to the paisa,', hl: true },
+  { t: 'filed into GSTR-1 tables as you go, and it keeps working' },
+  { t: 'when the internet doesn’t.', hl: true }
+];
+const heroSubText = heroSub.map((s) => s.t).join(' ');
+
 const testimonials = [
   { q: 'Earlier I wrote bills by hand and fixed GST mistakes at month-end. Now the counter boy issues invoices and the IGST is just right.', n: 'Rakesh S.', r: 'Electronics retailer, Pune' },
   { q: 'Clicking a number and seeing the exact invoices behind it — my CA stopped calling me every Friday.', n: 'Meenal K.', r: 'Hardware distributor, Nashik' },
@@ -135,7 +146,7 @@ const testimonials = [
     <meta name="theme-color" content="#F6F6F3" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
   </head>
   <body class="lp">
     <a class="skip" href="#features">Skip to features</a>
@@ -162,14 +173,58 @@ const testimonials = [
           <h1 id="hero-title" class="hero__title reveal-hero">
             GST billing that keeps<br /> your books <span class="mark">honest.</span>
           </h1>
-          <p class="hero__sub reveal-hero">
-            PayzenMax turns every counter sale into a Rule 46 tax invoice — CGST, SGST or IGST worked out to the paisa,
-            filed into GSTR-1 tables as you go, and it keeps working when the internet doesn’t.
+          <p class="hero__sub" aria-label={heroSubText} data-hero-sub>
+            {heroSub.map((seg) => (
+              <span class={seg.hl ? 'hl' : undefined} aria-hidden="true">
+                {seg.t.split(' ').map((w) => <><span class="w">{w}</span>{' '}</>)}
+              </span>
+            ))}
           </p>
           <div class="hero__ctas reveal-hero">
             <a class="btn btn--brand" href="/app/">Start billing — no login</a>
             <a class="btn btn--ghost" href="#features">See how it works</a>
+
+            <div class="note" aria-hidden="true" data-note>
+              <p class="note__text">
+                <span>Simple billing.</span>
+                <span>GST compliant.</span>
+                <span>Always on.</span>
+              </p>
+              <svg class="note__arrow" viewBox="0 0 160 150" fill="none">
+                <path class="note__stroke" pathLength="1" d="M138 14 C 82 18, 34 46, 30 132" />
+                <path class="note__stroke note__head" pathLength="1" d="M14 112 L 30 134 L 46 114" />
+              </svg>
+            </div>
           </div>
+
+          <form class="calc" data-calc aria-label="Quick GST check" onsubmit="return false">
+            <div class="calc__head">
+              <p class="calc__kicker"><span class="eyebrow__dot"></span> Try the GST engine</p>
+              <p class="calc__hint">Same paise-exact engine as the app</p>
+            </div>
+            <label class="calc__amount">
+              <span class="calc__label">Taxable amount</span>
+              <span class="calc__field">
+                <span aria-hidden="true">₹</span>
+                <input type="text" inputmode="decimal" value="10,000" data-calc-amount aria-label="Taxable amount in rupees" />
+              </span>
+            </label>
+            <div class="calc__group" role="radiogroup" aria-label="GST rate">
+              {[5, 12, 18, 28].map((r) => (
+                <button type="button" role="radio" aria-checked={r === 18 ? 'true' : 'false'} class={r === 18 ? 'is-on' : undefined} data-rate={r}>{r}%</button>
+              ))}
+            </div>
+            <div class="calc__group calc__group--2" role="radiogroup" aria-label="Supply type">
+              <button type="button" role="radio" aria-checked="true" class="is-on" data-supply="INTRA_STATE">Intra-state</button>
+              <button type="button" role="radio" aria-checked="false" data-supply="INTER_STATE">Inter-state</button>
+            </div>
+            <dl class="calc__out" aria-live="polite">
+              <div data-row="cgst"><dt>CGST <i data-cgst-rate>9%</i></dt><dd data-out="cgst">₹ 900.00</dd></div>
+              <div data-row="sgst"><dt>SGST <i data-sgst-rate>9%</i></dt><dd data-out="sgst">₹ 900.00</dd></div>
+              <div data-row="igst" hidden><dt>IGST <i data-igst-rate>18%</i></dt><dd data-out="igst">₹ 0.00</dd></div>
+              <div class="calc__total"><dt>Invoice total</dt><dd data-out="total">₹ 11,800.00</dd></div>
+            </dl>
+          </form>
         </section>
 
         <div class="stage" data-stage aria-label="Interactive product preview">
