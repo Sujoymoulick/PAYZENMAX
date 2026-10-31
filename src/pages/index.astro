@@ -1,0 +1,330 @@
+---
+import Laptop from '../components/landing/Laptop.astro';
+import Phone from '../components/landing/Phone.astro';
+import '../styles/landing.css';
+
+const features = [
+  {
+    id: 'billing',
+    tab: 'Invoices',
+    kicker: '01 — Counter billing',
+    title: 'Bill a customer before the queue notices.',
+    body: 'A keyboard-first invoice composer built for busy counters. Add lines with Alt+A, issue with Alt+Enter, and collect by Cash, UPI, IMPS/NEFT or cheque — or mark it on credit.',
+    points: ['Quick-add customers mid-bill', 'Live low-stock alerts per line', 'Sequential series like VT/26-27/0108'],
+    chips: [
+      { k: 'Alt + N', v: 'New invoice, from anywhere' },
+      { k: 'UPI', v: 'Payment reference saved on the bill' }
+    ]
+  },
+  {
+    id: 'gst',
+    tab: 'Dashboard',
+    kicker: '02 — GST engine',
+    title: 'CGST, SGST or IGST. Decided for you, to the paisa.',
+    body: 'PayzenMax compares the seller and buyer state codes and splits tax automatically. All arithmetic runs in integer paise, so totals never drift — inclusive or exclusive pricing alike.',
+    points: ['Intra-state → CGST + SGST', 'Inter-state → IGST', 'Transparent round-off to the rupee'],
+    chips: [
+      { k: '27 → 27', v: 'CGST 9% + SGST 9%' },
+      { k: '27 → 24', v: 'IGST 18%' }
+    ]
+  },
+  {
+    id: 'invoice',
+    tab: 'Invoices',
+    kicker: '03 — Rule 46 invoices',
+    title: 'Tax invoices that pass a CA’s glance.',
+    body: 'Every issued bill carries supplier and buyer GSTIN, place of supply, reverse-charge flag, HSN summary and the amount in Indian English words — printed clean on A4 with a scannable UPI QR.',
+    points: ['Original, Duplicate & Triplicate copies', 'Rupees Fourteen Thousand… in words', 'Print-ready, no UI clutter'],
+    chips: [
+      { k: 'HSN 8525', v: 'Rate-wise summary, auto-built' },
+      { k: 'QR', v: 'upi://pay on every invoice' }
+    ]
+  },
+  {
+    id: 'reports',
+    tab: 'GSTR',
+    kicker: '04 — Reports that explain themselves',
+    title: 'GSTR-1 ready, with the working shown.',
+    body: 'Tables 4, 7 and 12 are assembled as you bill. Click any number on the dashboard to see the exact formula, filters and invoices behind it. Export the sales register to CSV in one click.',
+    points: ['B2B, B2C small & HSN summary', 'Receivables aging by bucket', 'Today, week, month or FY 2026-27'],
+    chips: [
+      { k: 'Table 12', v: 'HSN summary of outward supplies' },
+      { k: '0–30 · 31–60 · 60+', v: 'Who owes what, and since when' }
+    ]
+  },
+  {
+    id: 'assistant',
+    tab: 'Dashboard',
+    kicker: '05 — Ask your books',
+    title: 'Questions answered from real transactions, not guesses.',
+    body: '“How much did I sell this month?” “Who hasn’t paid me?” The assistant only answers from your own invoices — and every answer links to the bills it used.',
+    points: ['Clickable citations on every answer', 'Push-to-talk with an editable transcript', 'Top items, GST liability, low stock'],
+    chips: [
+      { k: 'Cited', v: 'VT/26-27/0091 · VT/26-27/0102' },
+      { k: 'Voice', v: 'Speak, review, then ask' }
+    ]
+  },
+  {
+    id: 'offline',
+    tab: 'Items',
+    kicker: '06 — Yours, even offline',
+    title: 'No login. No lock-in. No lost bills.',
+    body: 'Your profile, masters and invoices live on your device first. Issued invoices are immutable — corrections go through cancellation or linked credit notes — and a full backup is one click away.',
+    points: ['Works when the internet doesn’t', 'Cancel with reason, stock restored', 'Export & restore JSON backups'],
+    chips: [
+      { k: 'Offline', v: 'Saved on this device' },
+      { k: 'Locked', v: 'Issued bills can’t be silently edited' }
+    ]
+  }
+];
+
+const mobile = [
+  {
+    view: 'home',
+    kicker: 'On the go',
+    title: 'Today’s numbers, in your pocket.',
+    body: 'Sales, GST split and who owes you — the owner’s view of the counter, from anywhere in the market.'
+  },
+  {
+    view: 'bill',
+    kicker: 'Bill & collect',
+    title: 'Raise a bill at the doorstep, collect on UPI.',
+    body: 'Line items, HSN, tax split and a UPI QR on one screen. Tap “Collect” on the phone to try it.'
+  },
+  {
+    view: 'ask',
+    kicker: 'Ask anything',
+    title: 'Your accountant’s questions, answered instantly.',
+    body: 'Tap a suggestion on the phone. Answers come from your books, with the invoice numbers to prove it.'
+  }
+];
+
+const steps = [
+  { n: '01', t: 'Add your GSTIN', d: '15-character CBIC validation pulls your state code automatically.' },
+  { n: '02', t: 'Load items & customers', d: 'HSN/SAC, rates, opening stock and buyer GSTINs — once.' },
+  { n: '03', t: 'Bill at the counter', d: 'Keyboard-fast invoices with the right tax every time.' },
+  { n: '04', t: 'Hand over clean books', d: 'GSTR-1 tables, sales register and aging, ready for your CA.' }
+];
+
+const stats = [
+  { v: '0', s: '', l: 'logins needed to start billing' },
+  { v: '0.00', s: '', l: 'paise of rounding drift per invoice' },
+  { v: '3', s: '', l: 'GSTR-1 tables built as you bill' },
+  { v: '24', s: '×7', l: 'works offline, at the counter' }
+];
+
+const testimonials = [
+  { q: 'Earlier I wrote bills by hand and fixed GST mistakes at month-end. Now the counter boy issues invoices and the IGST is just right.', n: 'Rakesh S.', r: 'Electronics retailer, Pune' },
+  { q: 'Clicking a number and seeing the exact invoices behind it — my CA stopped calling me every Friday.', n: 'Meenal K.', r: 'Hardware distributor, Nashik' },
+  { q: 'Internet goes off twice a day in our market. Billing doesn’t stop anymore.', n: 'Imran P.', r: 'Mobile accessories shop, Surat' },
+  { q: 'I asked “who hasn’t paid me” and got a list with bill numbers. That alone paid for the switch.', n: 'Anita D.', r: 'Stationery wholesaler, Indore' },
+  { q: 'The printed invoice has everything my B2B buyers ask for. No more re-issuing bills.', n: 'Joseph M.', r: 'Networking contractor, Kochi' },
+  { q: 'Alt+A, Alt+Enter. My staff learnt it in one afternoon.', n: 'Harpreet B.', r: 'Auto parts store, Ludhiana' }
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>PayzenMax — GST billing that keeps your books honest</title>
+    <meta name="description" content="Offline-first GST billing for Indian counters. CBIC Rule 46 invoices, automatic CGST/SGST/IGST, GSTR-1 ready reports and an assistant that answers from your own books." />
+    <meta property="og:title" content="PayzenMax — GST billing that keeps your books honest" />
+    <meta property="og:description" content="Offline-first GST billing, Rule 46 invoices and GSTR-1 ready reports for Indian businesses." />
+    <meta name="theme-color" content="#F6F6F3" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body class="lp">
+    <a class="skip" href="#features">Skip to features</a>
+
+    <header class="nav" data-nav>
+      <a class="nav__brand" href="/" aria-label="PayzenMax home">
+        <img src="/favicon.svg" alt="" width="28" height="28" />
+        <span>Payzen<b>Max</b></span>
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#features">Features</a>
+        <a href="#mobile">Mobile</a>
+        <a href="#how">How it works</a>
+        <a href="#stories">Stories</a>
+      </nav>
+      <a class="btn btn--dark btn--sm" href="/app/">Open the app <span aria-hidden="true">→</span></a>
+    </header>
+
+    <main>
+      <!-- ============ STORY: hero + sticky 3D stage + features + mobile ============ -->
+      <div class="story" data-story>
+        <section class="hero" aria-labelledby="hero-title">
+          <p class="eyebrow reveal-hero"><span class="eyebrow__dot"></span> GSTR-1 ready · Offline-first · Built for Indian counters</p>
+          <h1 id="hero-title" class="hero__title reveal-hero">
+            GST billing that keeps<br /> your books <span class="mark">honest.</span>
+          </h1>
+          <p class="hero__sub reveal-hero">
+            PayzenMax turns every counter sale into a Rule 46 tax invoice — CGST, SGST or IGST worked out to the paisa,
+            filed into GSTR-1 tables as you go, and it keeps working when the internet doesn’t.
+          </p>
+          <div class="hero__ctas reveal-hero">
+            <a class="btn btn--brand" href="/app/">Start billing — no login</a>
+            <a class="btn btn--ghost" href="#features">See how it works</a>
+          </div>
+        </section>
+
+        <div class="stage" data-stage aria-label="Interactive product preview">
+          <div class="stage__glow" aria-hidden="true"></div>
+          <div class="scene" data-scene>
+            <Laptop />
+            <Phone />
+          </div>
+          <div class="chips" aria-hidden="true">
+            {features.map((f) => (
+              <div class="chipset" data-chipset={f.id}>
+                {f.chips.map((c, i) => (
+                  <div class={`chip chip--${i}`}>
+                    <span class="chip__k">{c.k}</span>
+                    <span class="chip__v">{c.v}</span>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+          <div class="scroll-cue" data-cue aria-hidden="true"><span></span>Scroll</div>
+        </div>
+
+        <div class="story__content">
+          <div id="features" class="anchor"></div>
+          {features.map((f) => (
+            <section class="feature" data-feature={f.id} data-tab={f.tab} aria-labelledby={`f-${f.id}`}>
+              <div class="feature__card">
+                <p class="kicker">{f.kicker}</p>
+                <h2 id={`f-${f.id}`} class="feature__title">{f.title}</h2>
+                <p class="feature__body">{f.body}</p>
+                <ul class="feature__points">
+                  {f.points.map((p) => <li>{p}</li>)}
+                </ul>
+              </div>
+            </section>
+          ))}
+
+          <section class="stack" data-stack aria-labelledby="stack-title">
+            <div class="stack__card">
+              <p class="kicker">One ledger, every screen</p>
+              <h2 id="stack-title" class="feature__title">Close the laptop. The counter keeps going.</h2>
+              <p class="feature__body">The same books follow you from the shop desk to the phone in your pocket.</p>
+            </div>
+          </section>
+
+          <div id="mobile" class="anchor"></div>
+          <div class="phone-slot" data-phone-slot></div>
+          {mobile.map((m) => (
+            <section class="feature feature--right" data-mobile={m.view} aria-labelledby={`m-${m.view}`}>
+              <div class="feature__card">
+                <p class="kicker">Mobile preview · {m.kicker}</p>
+                <h2 id={`m-${m.view}`} class="feature__title">{m.title}</h2>
+                <p class="feature__body">{m.body}</p>
+                <button type="button" class="link-btn" data-go-phone={m.view}>Show on phone →</button>
+              </div>
+            </section>
+          ))}
+        </div>
+      </div>
+
+      <!-- ============ STATS ============ -->
+      <section class="stats" aria-label="PayzenMax in numbers">
+        {stats.map((s) => (
+          <div class="stat reveal">
+            <p class="stat__v"><span data-count={s.v}>{s.v}</span>{s.s}</p>
+            <p class="stat__l">{s.l}</p>
+          </div>
+        ))}
+      </section>
+
+      <!-- ============ HOW IT WORKS ============ -->
+      <section id="how" class="how" aria-labelledby="how-title">
+        <div class="section-head reveal">
+          <p class="kicker">How it works</p>
+          <h2 id="how-title" class="section-title">From GSTIN to GSTR-1 in four steps.</h2>
+        </div>
+        <ol class="steps">
+          {steps.map((s) => (
+            <li class="step reveal">
+              <span class="step__n">{s.n}</span>
+              <h3>{s.t}</h3>
+              <p>{s.d}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <!-- ============ TESTIMONIALS ============ -->
+      <section id="stories" class="stories" aria-labelledby="stories-title">
+        <div class="section-head reveal">
+          <p class="kicker">From the counter</p>
+          <h2 id="stories-title" class="section-title">Shopkeepers, not accountants, run it.</h2>
+        </div>
+        <div class="marquee" data-marquee>
+          <div class="marquee__track">
+            {[...testimonials, ...testimonials].map((t, i) => (
+              <figure class="receipt" aria-hidden={i >= testimonials.length ? 'true' : undefined}>
+                <p class="receipt__no">No. {String((i % testimonials.length) + 1).padStart(4, '0')}</p>
+                <blockquote>“{t.q}”</blockquote>
+                <figcaption><b>{t.n}</b><span>{t.r}</span></figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+        <p class="footnote">Sample testimonials shown for preview purposes.</p>
+      </section>
+
+      <!-- ============ CTA ============ -->
+      <section class="cta reveal" aria-labelledby="cta-title">
+        <p class="kicker kicker--light">Ready when you are</p>
+        <h2 id="cta-title" class="cta__title">Issue your first GST invoice in under a minute.</h2>
+        <p class="cta__sub">No signup. Demo data included. Your books stay on your device.</p>
+        <div class="hero__ctas">
+          <a class="btn btn--light" href="/app/">Open PayzenMax</a>
+          <a class="btn btn--outline-light" href="#features">Revisit features</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__top">
+        <div>
+          <a class="nav__brand" href="/"><img src="/favicon.svg" alt="" width="28" height="28" /><span>Payzen<b>Max</b></span></a>
+          <p class="footer__tag">Offline-ready GST billing &amp; business platform for India.</p>
+        </div>
+        <div class="footer__cols">
+          <div>
+            <p class="footer__h">Product</p>
+            <a href="#features">Features</a>
+            <a href="#mobile">Mobile</a>
+            <a href="/app/">Open the app</a>
+          </div>
+          <div>
+            <p class="footer__h">Compliance</p>
+            <span>CBIC Rule 46 invoices</span>
+            <span>GSTR-1 Tables 4, 7, 12</span>
+            <span>Credit notes &amp; cancellation</span>
+          </div>
+          <div>
+            <p class="footer__h">Company</p>
+            <a href="#stories">Stories</a>
+            <a href="#how">How it works</a>
+            <a href="mailto:hello@payzenmax.com">hello@payzenmax.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2026 PayzenMax.com</span>
+        <span class="mono">GSTIN-aware · Paise-exact · Made in India</span>
+      </div>
+    </footer>
+
+    <script>
+      import '../scripts/landing.ts';
+    </script>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+---
+// CSS-3D phone with an interactive PayzenMax mobile preview (Home / Bill / Ask).
+---
+<div class="phone" data-phone>
+  <div class="phone__face phone__front">
+    <div class="phone__screen" data-phone-screen data-view="home">
+      <div class="ps__status" aria-hidden="true">
+        <span>9:41</span>
+        <span class="ps__island"></span>
+        <span class="ps__icons"><i></i><i></i><i></i></span>
+      </div>
+
+      <!-- Home -->
+      <section class="ps__view" data-view-name="home" aria-label="Mobile home preview">
+        <header class="ps__head">
+          <div>
+            <p class="ps__muted">Vanguard Electronics</p>
+            <h4 class="ps__title">Good evening</h4>
+          </div>
+          <span class="ps__avatar">VE</span>
+        </header>
+        <div class="ps__hero-card">
+          <p class="ps__muted ps__muted--light">Today's sales</p>
+          <p class="ps__amount">₹48,250</p>
+          <p class="ps__delta">▲ 12% vs yesterday · 9 invoices</p>
+          <div class="ps__bars" aria-hidden="true">
+            <i style="--h:38%"></i><i style="--h:55%"></i><i style="--h:42%"></i><i style="--h:70%"></i>
+            <i style="--h:48%"></i><i style="--h:86%"></i><i style="--h:64%"></i>
+          </div>
+        </div>
+        <div class="ps__grid">
+          <button type="button" class="ps__tile" data-go="bill"><span>＋</span>New bill</button>
+          <button type="button" class="ps__tile" data-go="bill" data-qr><span>⌗</span>Collect UPI</button>
+          <button type="button" class="ps__tile" data-go="ask"><span>?</span>Ask books</button>
+        </div>
+        <div class="ps__list">
+          <p class="ps__label">GST this month</p>
+          <div class="ps__split" aria-hidden="true"><i style="--w:38%"></i><i style="--w:38%"></i><i style="--w:24%"></i></div>
+          <div class="ps__legend"><span>CGST ₹31,420</span><span>SGST ₹31,420</span><span>IGST ₹19,860</span></div>
+        </div>
+        <div class="ps__list">
+          <p class="ps__label">Receivables</p>
+          <div class="ps__item"><span>Shree Ganesh Traders</span><b class="is-warn">₹18,400 · 34d</b></div>
+          <div class="ps__item"><span>Patel Infotech Pvt Ltd</span><b>₹42,120 · 8d</b></div>
+        </div>
+      </section>
+
+      <!-- Bill -->
+      <section class="ps__view" data-view-name="bill" aria-label="Mobile billing preview">
+        <header class="ps__head">
+          <div>
+            <p class="ps__muted ps__mono">VT/26-27/0109</p>
+            <h4 class="ps__title">New tax invoice</h4>
+          </div>
+          <span class="ps__chip">Intra-state</span>
+        </header>
+        <div class="ps__list">
+          <p class="ps__label">Bill to</p>
+          <div class="ps__item"><span>Kulkarni Systems</span><b class="ps__mono">27ABMFK9021D1Z8</b></div>
+        </div>
+        <div class="ps__list">
+          <div class="ps__line"><span>Hikvision 4MP Dome Camera<small>HSN 8525 · 4 × ₹3,200</small></span><b>₹12,800</b></div>
+          <div class="ps__line"><span>Cat6 Cable 305m box<small>HSN 8544 · 1 × ₹6,500</small></span><b>₹6,500</b></div>
+          <div class="ps__line"><span>CCTV Installation<small>SAC 9987 · 1 × ₹2,500</small></span><b>₹2,500</b></div>
+        </div>
+        <div class="ps__totals">
+          <div><span>Taxable</span><b>₹21,800.00</b></div>
+          <div><span>CGST 9%</span><b>₹1,962.00</b></div>
+          <div><span>SGST 9%</span><b>₹1,962.00</b></div>
+          <div><span>Round off</span><b>+₹0.00</b></div>
+          <div class="ps__grand"><span>Total</span><b>₹25,724</b></div>
+        </div>
+        <button type="button" class="ps__cta" data-qr-toggle>Collect ₹25,724 via UPI</button>
+        <div class="ps__qr" data-qr-panel hidden>
+          <div class="ps__qrcode" aria-hidden="true"></div>
+          <p>Scan with any UPI app<br /><span class="ps__mono">vanguard@okhdfc</span></p>
+          <button type="button" class="ps__paid" data-paid>Mark as paid</button>
+        </div>
+      </section>
+
+      <!-- Ask -->
+      <section class="ps__view" data-view-name="ask" aria-label="Mobile assistant preview">
+        <header class="ps__head">
+          <div>
+            <p class="ps__muted">Grounded in your books</p>
+            <h4 class="ps__title">Ask PayzenMax</h4>
+          </div>
+          <span class="ps__chip">Beta</span>
+        </header>
+        <div class="ps__chat" data-chat>
+          <p class="ps__bubble ps__bubble--me">Who hasn't paid me?</p>
+          <div class="ps__bubble ps__bubble--ai">
+            2 customers owe you <b>₹60,520</b>. Shree Ganesh Traders is 34 days overdue.
+            <span class="ps__cites"><a>VT/26-27/0091</a><a>VT/26-27/0102</a></span>
+          </div>
+        </div>
+        <div class="ps__suggest">
+          <button type="button" data-ask="sales">Sales this month?</button>
+          <button type="button" data-ask="gst">GST liability?</button>
+          <button type="button" data-ask="stock">Low stock?</button>
+        </div>
+      </section>
+
+      <nav class="ps__tabs" aria-label="Mobile preview tabs">
+        <button type="button" data-go="home" class="is-active">Home</button>
+        <button type="button" data-go="bill">Bill</button>
+        <button type="button" data-go="ask">Ask</button>
+      </nav>
+    </div>
+  </div>
+  <div class="phone__face phone__back" aria-hidden="true"><span class="phone__lens"></span><span class="lid__logo">₹</span></div>
+  <div class="phone__face phone__edge phone__edge--l" aria-hidden="true"></div>
+  <div class="phone__face phone__edge phone__edge--r" aria-hidden="true"></div>
+  <div class="phone__face phone__edge phone__edge--t" aria-hidden="true"></div>
+  <div class="phone__face phone__edge phone__edge--b" aria-hidden="true"></div>
+</div>

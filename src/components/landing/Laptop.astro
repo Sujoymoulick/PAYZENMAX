@@ -1,0 +1,50 @@
+---
+// CSS-3D laptop. The screen hosts the real PayzenMax app (/app/) in an iframe,
+// so visitors can click around the live MVP with demo data.
+---
+<div class="laptop" data-laptop>
+  <div class="laptop__lid" data-lid>
+    <div class="lid__front">
+      <div class="lid__bezel">
+        <span class="lid__cam" aria-hidden="true"></span>
+        <div class="screen" data-screen>
+          <div class="screen__fallback" aria-hidden="true">
+            <div class="sf__side">
+              <i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <div class="sf__main">
+              <div class="sf__row"><b></b><b></b><b></b><b></b></div>
+              <div class="sf__chart"></div>
+              <div class="sf__table"><i></i><i></i><i></i><i></i></div>
+            </div>
+          </div>
+          <iframe
+            class="screen__app"
+            data-app-frame
+            src="/app/"
+            title="PayzenMax live demo — GST billing dashboard"
+            loading="eager"
+            tabindex="-1"></iframe>
+          <button class="screen__shield" type="button" data-shield>
+            <span class="shield__pill">
+              <span class="shield__dot" aria-hidden="true"></span>
+              Click to try the live app
+            </span>
+          </button>
+          <div class="screen__glare" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+    <div class="lid__back" aria-hidden="true">
+      <span class="lid__logo">₹</span>
+    </div>
+  </div>
+  <div class="laptop__base" aria-hidden="true">
+    <div class="base__deck">
+      <div class="base__keys"></div>
+      <div class="base__pad"></div>
+    </div>
+    <div class="base__front"><span></span></div>
+  </div>
+  <div class="laptop__shadow" aria-hidden="true"></div>
+</div>
