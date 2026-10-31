@@ -18,7 +18,8 @@
   --amber: #A14A0B;
   --amber-bg: #FBEEE3;
   --radius: 18px;
-  --sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --display: 'Manrope', 'Inter', system-ui, sans-serif;
   --mono: 'IBM Plex Mono', ui-monospace, monospace;
   --fit: 1;
   --pfit: 1;
@@ -43,6 +44,11 @@ body.lp {
 .lp a { color: inherit; text-decoration: none; }
 .lp h1, .lp h2, .lp h3, .lp h4, .lp p { margin: 0; }
 .mono { font-family: var(--mono); }
+
+/* Headings: Manrope (hero 800, sections 700); body & buttons: Inter */
+.hero__title, .section-title, .feature__title, .cta__title, .step h3, .nav__brand, .ps__title {
+  font-family: var(--display);
+}
 
 .skip {
   position: absolute; left: 12px; top: -60px; z-index: 100;
@@ -90,7 +96,7 @@ body.lp {
   transition: box-shadow .3s, background-color .3s;
 }
 .nav.is-scrolled { background: rgba(255,255,255,.86); box-shadow: 0 12px 40px -18px rgba(23,24,26,.35); }
-.nav__brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 18px; letter-spacing: -0.02em; }
+.nav__brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; letter-spacing: -0.02em; }
 .nav__brand b { color: var(--green); font-weight: 700; }
 .nav__links { display: flex; gap: 6px; }
 .nav__links a { padding: 8px 14px; border-radius: 999px; font-size: 14px; color: var(--ink-2); transition: background-color .2s; }
@@ -108,7 +114,7 @@ body.lp {
 .kicker--light { color: var(--sage); }
 .mark { background: linear-gradient(transparent 60%, #CFE6D7 60%, #CFE6D7 92%, transparent 92%); padding: 0 .06em; }
 .section-head { text-align: center; max-width: 760px; margin: 0 auto 56px; }
-.section-title { font-size: clamp(32px, 4.4vw, 56px); line-height: 1.05; letter-spacing: -0.035em; font-weight: 600; }
+.section-title { font-size: clamp(32px, 4.4vw, 56px); line-height: 1.05; letter-spacing: -0.035em; font-weight: 700; }
 
 /* =====================================================================
    STORY — hero + sticky 3D stage + scrolling content
@@ -124,7 +130,7 @@ body.lp {
 .hero > * { pointer-events: auto; }
 .hero__title {
   margin-top: 22px !important;
-  font-size: clamp(40px, 6.2vw, 84px); line-height: 0.98; letter-spacing: -0.045em; font-weight: 600;
+  font-size: clamp(40px, 6.2vw, 84px); line-height: 1; letter-spacing: -0.04em; font-weight: 800;
 }
 .hero__sub { margin-top: 20px !important; max-width: 640px; font-size: 18px; color: var(--muted); }
 .hero__ctas { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
@@ -363,7 +369,7 @@ body.lp {
   opacity: 1; visibility: inherit; transform: none; transition-delay: 0s;
 }
 .ps__head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.ps__title { font-size: 19px; font-weight: 600; letter-spacing: -0.02em; }
+.ps__title { font-size: 19px; font-weight: 700; letter-spacing: -0.02em; }
 .ps__muted { color: var(--muted); font-size: 11px; }
 .ps__muted--light { color: rgba(255,255,255,.7); }
 .ps__mono { font-family: var(--mono); }
@@ -480,7 +486,7 @@ body.lp {
 }
 .feature--right { justify-content: flex-end; }
 .feature__card { max-width: 470px; }
-.feature__title { font-size: clamp(30px, 3.3vw, 46px); line-height: 1.06; letter-spacing: -0.035em; font-weight: 600; }
+.feature__title { font-size: clamp(30px, 3.3vw, 46px); line-height: 1.06; letter-spacing: -0.035em; font-weight: 700; }
 .feature__body { margin-top: 18px !important; font-size: 17px; color: var(--muted); }
 .feature__points { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 10px; }
 .feature__points li { position: relative; padding-left: 30px; font-size: 15px; color: var(--ink-2); }
@@ -520,7 +526,7 @@ body.lp {
 }
 .step:hover { transform: translateY(-6px); border-color: var(--sage); box-shadow: 0 24px 50px -30px rgba(27,94,59,.55); }
 .step__n { display: inline-block; font: 600 13px/1 var(--mono); color: var(--green); padding: 6px 9px; border-radius: 8px; background: var(--mint); }
-.step h3 { margin-top: 22px; font-size: 19px; letter-spacing: -0.02em; font-weight: 600; }
+.step h3 { margin-top: 22px; font-size: 19px; letter-spacing: -0.02em; font-weight: 700; }
 .step p { margin-top: 8px; font-size: 14.5px; color: var(--muted); }
 .step:not(:last-child)::after {
   content: ''; position: absolute; top: 40px; right: -17px; width: 18px; height: 1px;
@@ -567,7 +573,7 @@ body.lp {
   background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
   background-size: 100% 34px;
 }
-.cta__title { position: relative; max-width: 780px; font-size: clamp(32px, 4.6vw, 60px); line-height: 1.02; letter-spacing: -0.04em; font-weight: 600; }
+.cta__title { position: relative; max-width: 780px; font-size: clamp(32px, 4.6vw, 60px); line-height: 1.02; letter-spacing: -0.04em; font-weight: 700; }
 .cta__sub { position: relative; margin-top: 18px !important; color: rgba(255,255,255,.75); font-size: 17px; }
 .cta .hero__ctas { position: relative; }
 
