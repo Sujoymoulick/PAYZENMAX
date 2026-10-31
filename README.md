@@ -24,6 +24,14 @@ npm run build
 npm run preview
 ```
 
+### Deploy to Cloudflare (Workers Static Assets)
+Config lives in `wrangler.jsonc` (serves the static `dist/` build).
+```bash
+npx wrangler login     # once
+npm run deploy         # astro build + wrangler deploy
+npm run cf:dev         # preview the built site on the Workers runtime (localhost:8787)
+```
+
 ---
 
 ## 🌟 Implemented Core Capabilities

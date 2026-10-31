@@ -7,7 +7,9 @@
     "dev": "astro dev",
     "build": "tsc --noEmit && astro build",
     "preview": "astro preview --port 4173 --host",
-    "astro": "astro"
+    "astro": "astro",
+    "cf:dev": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "@astrojs/react": "^7.1.2",
@@ -28,6 +30,7 @@
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.2",
-    "vite": "^6.0.7"
+    "vite": "^6.0.7",
+    "wrangler": "^4.156.0"
   }
 }
