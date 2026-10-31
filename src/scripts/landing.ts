@@ -277,10 +277,12 @@ mm.add(
       rotationY: 0,
       rotationZ: 0
     };
+    // Keep the rotated laptop (lid + base) inside the right half of the viewport
+    const featureFit = () => Math.min(heroFit() * 0.74, (vw() * 0.4) / 1000, (vh() * 0.72) / 1000);
     const featurePose = {
-      x: () => vw() * 0.215,
-      y: () => vh() * 0.02,
-      scale: () => heroFit() * 0.74,
+      x: () => vw() * 0.255,
+      y: () => -vh() * 0.02,
+      scale: () => featureFit(),
       rotationX: -10,
       rotationY: -24,
       rotationZ: 0
@@ -288,7 +290,7 @@ mm.add(
     const parkedPose = {
       x: () => -vw() * 0.3,
       y: () => vh() * 0.28,
-      scale: () => heroFit() * 0.5,
+      scale: () => featureFit() * 0.68,
       rotationX: -62,
       rotationY: -16,
       rotationZ: 4
